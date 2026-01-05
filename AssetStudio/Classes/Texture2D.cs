@@ -124,6 +124,7 @@ namespace AssetStudio
                 if (version >= (2022, 2)) //2022.2 and up
                 {
                     var m_IgnoreMipmapLimit = reader.ReadBoolean();
+                    var m_IsRawDataOnly = reader.ReadBoolean();
                     reader.AlignStream();
                 }
                 else
@@ -148,6 +149,13 @@ namespace AssetStudio
             {
                 var m_StreamingMipmapsPriority = reader.ReadInt32();
             }
+            var m_StreamingMipmapsLayer = reader.ReadInt32();
+            var m_StreamingSmallestMipmap = reader.ReadInt32();
+            var m_TimeoutBehaviour = reader.ReadInt32();
+            var m_ThumbnailDataSize = reader.ReadInt32();
+            reader.Position += m_ThumbnailDataSize;
+            reader.AlignStream();
+            
             m_ImageCount = reader.ReadInt32();
             var m_TextureDimension = reader.ReadInt32();
             m_TextureSettings = new GLTextureSettings(reader);
